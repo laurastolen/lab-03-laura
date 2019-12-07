@@ -4,6 +4,7 @@ let mainVariable = 0;
 
 const animalArray = [];
 const animalArray2 = [];
+const allAnimals = [];
 
 function Animal(animalObj) {
   // eslint-disable-next-line camelcase
@@ -16,9 +17,12 @@ function Animal(animalObj) {
     this.page = 'page1';
     animalArray.push(this);
   }
-  else {
+  else if (mainVariable === 1) {
     this.page = 'page2';
     animalArray2.push(this);
+  } else {
+    this.page = 'both-pages';
+    allAnimals.push(this);
   }
 }
 
@@ -45,7 +49,7 @@ Animal.prototype.render = function () {
   return template(this);
 };
 
-// get page one data, render HB templates and dropdown
+// get page one data, render HB templates
 $(document).ready($.get('data/page-1.json', data => {
   data.forEach(animal => {
     new Animal(animal);
@@ -53,7 +57,7 @@ $(document).ready($.get('data/page-1.json', data => {
   animalArray.forEach(animal => {
     $('main[id=page-one]').append(animal.render());
   });
-  renderDropdown(data);
+  // renderDropdown(data);
 })
 );
 
@@ -66,9 +70,19 @@ $(document).ready($.get('data/page-2.json', data => {
   animalArray2.forEach(animal => {
     $('main[id=page-two]').append(animal.render());
   });
-  renderDropdown(data);
+  // renderDropdown(data);
 })
 );
+
+
+$(document).ready($.get('data/both-pages.json', data => {
+  mainVariable = 2;
+  data.forEach(animal => {
+    new Animal(animal);
+  });
+  renderDropdown(data);
+}));
+
 
 // page one button listener
 $('#btn-pg-1').on('click', function () {
@@ -97,7 +111,7 @@ $('#btn-both-pgs').on('click', function () {
     renderDropdown(data);
     $('main[id="page-one"] section').show();
     $('main[id="page-two"] section').show();
-    mainVariable = 3;
+    mainVariable = 2;
   }));
 });
 
@@ -109,11 +123,26 @@ $(document).ready($('#myselection').on('change', function () {
   }
   else if (mainVariable === 1) {
     $(`img[alt=${this.value}][page=page2]`).parent().show();
-  } else if (mainVariable === 3) {
+  } else if (mainVariable === 2) {
     $(`img[alt=${this.value}]`).parent().show();
   }
 })
 );
 
-// sort by horns or title
-// $(document).ready()
+// -------------sort by horns or title:-----------------------
+
+// declare sortbyfx that takes in either title or horns as parameter
+
+  // clear everything
+  // get the data
+  // sort it
+  // render it
+
+
+
+
+// event listeners for .sortby (sortBy buttons)
+  // if event.target.id is horns
+    // call sortbyfx(horns)
+  // else if event target id is title
+    // call sortbyfx(title)
