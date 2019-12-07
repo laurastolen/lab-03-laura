@@ -132,17 +132,31 @@ $(document).ready($('#myselection').on('change', function () {
 // -------------sort by horns or title:-----------------------
 
 // declare sortbyfx that takes in either title or horns as parameter
-
+function sortAndRender(whatToSortBy) {
   // clear everything
-  // get the data
-  // sort it
+  $('section').hide();
+  // sort the allAnimals array
+  if (whatToSortBy === 'Horns') {
+    // sort array by horns
+  } else if (whatToSortBy === 'Title') {
+    // sort array by title
+  }
   // render it
+  if (mainVariable === 0) {
+    $('main[id="page-one"] section').show();
+  } else if (mainVariable === 1) {
+    $('main[id="page-two"] section').show();
+  } else if (mainVariable === 2) {
+    $('main[id="page-one"] section').show();
+    $('main[id="page-two"] section').show();
+  }
+}
 
-
-
-
-// event listeners for .sortby (sortBy buttons)
-  // if event.target.id is horns
-    // call sortbyfx(horns)
-  // else if event target id is title
-    // call sortbyfx(title)
+// event listeners for sortBy buttons with callback of:
+$('.sortby').on('click', function (event) {
+  if (event.target.id === 'horn-sort') {
+    sortAndRender('Horns');
+  } else if (event.target.id === 'title-sort') {
+    sortAndRender('Title');
+  }
+});
