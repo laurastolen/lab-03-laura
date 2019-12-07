@@ -3,6 +3,7 @@
 let mainVariable = 0;
 
 const animalArray = [];
+const animalArray2 = [];
 
 function Animal(animalObj) {
   // eslint-disable-next-line camelcase
@@ -11,11 +12,17 @@ function Animal(animalObj) {
   this.description = animalObj.description;
   this.keyword = animalObj.keyword;
   this.horns = animalObj.horns;
-
-  animalArray.push(this);
+  if (mainVariable === 0) {
+    this.page = 'page1';
+    animalArray.push(this);
+  }
+  else {
+    this.page = 'page2';
+    animalArray2.push(this);
+  }
 }
 
-//Dropdown menu function
+// create and render dropdown
 function renderDropdown(animalArray) {
 
   const tempArray = [];
@@ -33,94 +40,63 @@ function renderDropdown(animalArray) {
 }
 
 Animal.prototype.render = function () {
-  // make a template
-  const myTemplate = $('#animal-template').html();
-
-  // make a new section
-  const $newSection = $('<section></section>');
-
-  // put the template html into my new section
-  $newSection.html(myTemplate);
-
-  // find the h2 and fill it with the name
-  $newSection.find('h2').text(this.title);
-
-  // find the h3 tag and fill with horn
-  $newSection.find('h3').text('This animal has ' + this.horns + ' horn/horns.');
-
-  // find the img and fill the src and alt
-  $newSection.find('img').attr('src', this.image_url);
-  $newSection.find('img').attr('alt', this.keyword);
-
-  if(mainVariable === 0){
-    $newSection.find('img').attr('page', "page1");
-  }
-  else{
-    $newSection.find('img').attr('page', "page2");
-  }
-
-  // find the p tag and fill with description
-  $newSection.find('p').text(this.description);
-
-  if(mainVariable === 0){
-    $('main[id="page-one"]').append($newSection);
-  }
-  else{
-    $('main[id="page-two"]').append($newSection);
-  }
+  let source = document.getElementById('animal-template').innerHTML;
+  let template = Handlebars.compile(source);
+  return template(this);
 };
 
-//Create dropdown menu - page one data
+// get page one data, render HB templates and dropdown
 $(document).ready($.get('data/page-1.json', data => {
   data.forEach(animal => {
-    new Animal(animal).render();
+    new Animal(animal);
   });
-  $('main[id=page-one] section[id="animal-template"]').remove();
+  animalArray.forEach(animal => {
+    $('main[id=page-one]').append(animal.render());
+  });
   renderDropdown(data);
 })
 );
 
-// page two data
+// get page two data, render HB templates
 $(document).ready($.get('data/page-2.json', data => {
   mainVariable = 1;
   data.forEach(animal => {
-    new Animal(animal).render();
+    new Animal(animal);
   });
-  $('main[id=page-two] section[id="animal-template"]').remove();
-  $('main[id="page-two"] section').hide();
+  animalArray2.forEach(animal => {
+    $('main[id=page-two]').append(animal.render());
+  });
 })
 );
 
-// page one button
-$('button:first-of-type').on('click', function(){
+// page one button listener
+$('button:first-of-type').on('click', function () {
   ($.get('data/page-1.json', data => {
     renderDropdown(data);
-    }));
+  }));
   $('section').hide();
   $('main[id="page-one"] section').show();
   mainVariable = 0;
 });
 
-// page two button
-$('button:last-of-type').on('click', function(){
+// page two button listener
+$('button:last-of-type').on('click', function () {
   ($.get('data/page-2.json', data => {
-  renderDropdown(data);
+    renderDropdown(data);
   }));
   $('section').hide();
   $('main[id="page-two"] section').show();
   mainVariable = 1;
 });
 
-//Filters animals via selections
+// dropdown listener
 $(document).ready($('#myselection').on('change', function () {
   $('section').hide();
-  // $(`section:contains(${this.value})`).show();
-  if(mainVariable === 0){
+  if (mainVariable === 0) {
     $(`img[alt=${this.value}][page=page1]`).parent().show();
   }
-  else{
+  else {
     $(`img[alt=${this.value}][page=page2]`).parent().show();
   }
 })
 );
-
