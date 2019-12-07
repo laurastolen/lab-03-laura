@@ -66,11 +66,12 @@ $(document).ready($.get('data/page-2.json', data => {
   animalArray2.forEach(animal => {
     $('main[id=page-two]').append(animal.render());
   });
+  renderDropdown(data);
 })
 );
 
 // page one button listener
-$('button:first-of-type').on('click', function () {
+$('#btn-pg-1').on('click', function () {
   ($.get('data/page-1.json', data => {
     renderDropdown(data);
   }));
@@ -80,7 +81,7 @@ $('button:first-of-type').on('click', function () {
 });
 
 // page two button listener
-$('button:last-of-type').on('click', function () {
+$('#btn-pg-2').on('click', function () {
   ($.get('data/page-2.json', data => {
     renderDropdown(data);
   }));
@@ -89,14 +90,30 @@ $('button:last-of-type').on('click', function () {
   mainVariable = 1;
 });
 
+// show both pages listener
+$('#btn-both-pgs').on('click', function () {
+  $('section').hide();
+  ($.get('data/both-pages.json', data => {
+    renderDropdown(data);
+    $('main[id="page-one"] section').show();
+    $('main[id="page-two"] section').show();
+    mainVariable = 3;
+  }));
+});
+
 // dropdown listener
 $(document).ready($('#myselection').on('change', function () {
   $('section').hide();
   if (mainVariable === 0) {
     $(`img[alt=${this.value}][page=page1]`).parent().show();
   }
-  else {
+  else if (mainVariable === 1) {
     $(`img[alt=${this.value}][page=page2]`).parent().show();
+  } else if (mainVariable === 3) {
+    $(`img[alt=${this.value}]`).parent().show();
   }
 })
 );
+
+// sort by horns or title
+// $(document).ready()
