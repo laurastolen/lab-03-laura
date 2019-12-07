@@ -133,17 +133,15 @@ $(document).ready($('#myselection').on('change', function () {
 
 // declare sortbyfx that takes in either title or horns as parameter
 function sortAndRender(whatToSortBy) {
-  // clear everything
-  $('section').hide();
-  // sort the allAnimals array
+  // $('section').hide();
+  let tempArray = $('section[style!="display: none;"]');
+  tempArray.toArray();
   if (whatToSortBy === 'Horns') {
-    // sort array by horns
-    allAnimals.sort((a, b) => {
+    tempArray.sort((a, b) => {
       return a.horns - b.horns;
     });
   } else if (whatToSortBy === 'Title') {
-    // sort array by keyword
-    allAnimals.sort((a, b) => {
+    tempArray.sort((a, b) => {
       if (a.keyword < b.keyword) {
         return -1;
       } else if (a.keyword > b.keyword) {
@@ -153,20 +151,27 @@ function sortAndRender(whatToSortBy) {
       }
     });
   }
-  // at this point we have a sorted allAnimals array, need to render it
-  if (mainVariable === 0) {
-    $('main[id="page-one"] section').show();
-  } else if (mainVariable === 1) {
-    $('main[id="page-two"] section').show();
-  } else if (mainVariable === 2) {
-    $('main[id="page-one"] section').show();
-    $('main[id="page-two"] section').show();
-  }
+
+  // at this point we have a sorted tempArray, need to render it
+  // for (let i = 0; i < tempArray.length; i++) {
+  //   $('img').parent().show(); OR...
+  // $('section[style!="display: none;"]').parent().show
+  // }
+
+
+  // if (mainVariable === 0) {
+  //   $('main[id="page-one"] section').show();
+  // } else if (mainVariable === 1) {
+  //   $('main[id="page-two"] section').show();
+  // } else if (mainVariable === 2) {
+  //   $('main[id="page-one"] section').show();
+  //   $('main[id="page-two"] section').show();
+  // }
 }
 
 
 
-// event listeners for sortBy buttons with callback of:
+// event listeners for sortBy buttons with callback of sortAndRender:
 $('.sortby').on('click', function (event) {
   if (event.target.id === 'horn-sort') {
     sortAndRender('Horns');
