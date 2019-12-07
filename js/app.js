@@ -138,10 +138,22 @@ function sortAndRender(whatToSortBy) {
   // sort the allAnimals array
   if (whatToSortBy === 'Horns') {
     // sort array by horns
+    allAnimals.sort((a, b) => {
+      return a.horns - b.horns;
+    });
   } else if (whatToSortBy === 'Title') {
-    // sort array by title
+    // sort array by keyword
+    allAnimals.sort((a, b) => {
+      if (a.keyword < b.keyword) {
+        return -1;
+      } else if (a.keyword > b.keyword) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
   }
-  // render it
+  // at this point we have a sorted allAnimals array, need to render it
   if (mainVariable === 0) {
     $('main[id="page-one"] section').show();
   } else if (mainVariable === 1) {
@@ -151,6 +163,8 @@ function sortAndRender(whatToSortBy) {
     $('main[id="page-two"] section').show();
   }
 }
+
+
 
 // event listeners for sortBy buttons with callback of:
 $('.sortby').on('click', function (event) {
