@@ -32,43 +32,43 @@ Start time: 12:00
 Finish time: 12:30
 
 Actual time needed to complete: 30 minutes
-### Day Two
+### Day Two (and beyond)
 Number and name of feature: Feature # 1: Pagination
 
 Estimate of time needed to complete: 1 hour
 
-Start time: 
+Start time: 10:04 am
 
-Finish time: 
+Finish time: 12:30 pm
 
-Actual time needed to complete:
+Actual time needed to complete: 2.5 hours initially, plus revisions in days to follow. Ultimately, probably 3-4 hours spent on this task.
 
-Number and name of feature: Feature # 2: 45 minutes
+Number and name of feature: Feature # 2: Templating
 
-Estimate of time needed to complete: 
+Estimate of time needed to complete: 45 minutes
 
-Start time: 
+Start time: 12:30
 
-Finish time: 
+Finish time: 1:45
 
-Actual time needed to complete:
+Actual time needed to complete: 1.25 hours
 
-Number and name of feature: Feature # 3: 45 minutes
+Number and name of feature: Feature # 3: Flexbox
 
-Estimate of time needed to complete: 
+Estimate of time needed to complete: 30 minutes
 
-Start time: 
+Start time: 11:30 am
 
-Finish time: 
+Finish time: 12:30 pm
 
-Actual time needed to complete:
+Actual time needed to complete: 1 hour
 
-Number and name of feature: Feature # 4: 1 hour
+Number and name of feature: Feature # 4: Sorting
 
-Estimate of time needed to complete: 
+Estimate of time needed to complete: 1 hour
 
-Start time: 
+Start time: Saturday am
 
-Finish time: 
+Finish time: Sunday am
 
-Actual time needed to complete:
+Actual time needed to complete: approx three hours over two days

@@ -5,18 +5,31 @@ header {
 
 h1 {
   font-size: 30px;
+  font-weight: 700;
 }
 
 select {
   margin-top: 15px;
   margin-left: 15px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  padding: 5px;
+  line-height: 10px;
 }
 
 button {
   font-size: 15px;
   border-radius: 5px;
   margin: 10px;
+  padding: 5px 15px;
+  border: 1px solid #aaa;
 }
+
+p, h2, h3 {
+  line-height: 25px;
+}
+
+
 
 @media all and (min-width: 200px) {
   section {
