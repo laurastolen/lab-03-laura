@@ -15,7 +15,6 @@
         <img src={{image_url}} alt={{keyword}} page={{page}}>
         <p>{{description}}</p>
     </section>
-  
   </script>
 
 </head>
@@ -23,40 +22,24 @@
 <body>
   <header>
     <h1>Horned animals</h1>
+
+    <select id="myselection">
+      <option value="default"></option>
+      <optgroup label="Filter by Animal Species">
+      </optgroup>
+    </select>
+
+    <button id="btn-pg-1">Page One Only</button>
+    <button id="btn-pg-2">Page Two Only</button>
+    <button id="btn-both-pgs">Show All Animals!</button>
+    <button class="sortby" id="horn-sort">Sort All Animals By Horns</button>
+    <button class="sortby" id="title-sort">Sort All Animals By Name</button>
   </header>
-  <select id="myselection">
-    <option value="default"></option>
-    <optgroup label="Filter by Animal Species">
-
-    </optgroup>
-
-
-  </select>
-
-  <button id="btn-pg-1">Page One Only</button>
-  <button id="btn-pg-2">Page Two Only</button>
-  <button id="btn-both-pgs">Show All Animals!</button>
-  <button class="sortby" id="horn-sort">Sort By Horns</button>
-  <button class="sortby" id="title-sort">Sort By Animal</button>
 
   <div>
-    <main id="page-one">
-      <!-- <section id="animal-template">
-        <h2></h2>
-        <h3></h3>
-        <img src="" alt="">
-        <p></p>
-      </section> -->
-    </main>
+    <main id="page-one"></main>
 
-    <main id="page-two">
-      <!-- <section id="animal-template">
-        <h2></h2>
-        <h3></h3>
-        <img src="" alt="">
-        <p></p>
-      </section> -->
-    </main>
+    <main id="page-two"></main>
 
     <main id="both-pages"></main>
 

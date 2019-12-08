@@ -28,7 +28,6 @@ function Animal(animalObj) {
 
 // create and render dropdown
 function renderDropdown(animalArray) {
-
   const tempArray = [];
   $('optgroup').empty();
   animalArray.forEach(animal => {
@@ -83,17 +82,18 @@ $(document).ready($.get('data/both-pages.json', data => {
   allAnimals.forEach(animal => {
     $('main[id=both-pages]').append(animal.render());
   });
+  renderDropdown(data);
 })
 );
 
 
-$(document).ready($.get('data/both-pages.json', data => {
-  mainVariable = 2;
-  data.forEach(animal => {
-    new Animal(animal);
-  });
-  renderDropdown(data);
-}));
+// $(document).ready($.get('data/both-pages.json', data => {
+//   mainVariable = 2;
+//   data.forEach(animal => {
+//     new Animal(animal);
+//   });
+//   renderDropdown(data);
+// }));
 
 
 // page one button listener
@@ -136,7 +136,7 @@ $(document).ready($('#myselection').on('change', function () {
   else if (mainVariable === 1) {
     $(`img[alt=${this.value}][page=page2]`).parent().show();
   } else if (mainVariable === 2) {
-    $(`img[alt=${this.value}]`).parent().show();
+    $(`img[alt=${this.value}][page=both-pages]`).parent().show();
   }
 })
 );
@@ -145,15 +145,16 @@ $(document).ready($('#myselection').on('change', function () {
 
 // declare sortbyfx that takes in either title or horns as parameter
 function sortAndRender(whatToSortBy) {
-  // $('section').hide();
-  let tempArray = $('section[style!="display: none;"]');
-  tempArray.toArray();
+  $('section').hide();
+  // let tempArray = $('section[style!="display: none;"]');
+  // tempArray.toArray();
+
   if (whatToSortBy === 'Horns') {
-    tempArray.sort((a, b) => {
+    allAnimals.sort((a, b) => {
       return a.horns - b.horns;
     });
   } else if (whatToSortBy === 'Title') {
-    tempArray.sort((a, b) => {
+    allAnimals.sort((a, b) => {
       if (a.keyword < b.keyword) {
         return -1;
       } else if (a.keyword > b.keyword) {
@@ -163,23 +164,26 @@ function sortAndRender(whatToSortBy) {
       }
     });
   }
-
-  // at this point we have a sorted tempArray, need to render it
-  // for (let i = 0; i < tempArray.length; i++) {
-  //   $('img').parent().show(); OR...
-  // $('section[style!="display: none;"]').parent().show
-  // }
-
-
-  // if (mainVariable === 0) {
-  //   $('main[id="page-one"] section').show();
-  // } else if (mainVariable === 1) {
-  //   $('main[id="page-two"] section').show();
-  // } else if (mainVariable === 2) {
-  //   $('main[id="page-one"] section').show();
-  //   $('main[id="page-two"] section').show();
-  // }
+  allAnimals.forEach(animal => {
+    $('main[id=both-pages]').append(animal.render());
+  });
 }
+
+// at this point we have a sorted tempArray, need to render it
+// for (let i = 0; i < tempArray.length; i++) {
+//   $('img').parent().show(); OR...
+// $('section[style!="display: none;"]').parent().show
+// }
+
+
+// if (mainVariable === 0) {
+//   $('main[id="page-one"] section').show();
+// } else if (mainVariable === 1) {
+//   $('main[id="page-two"] section').show();
+// } else if (mainVariable === 2) {
+//   $('main[id="page-one"] section').show();
+//   $('main[id="page-two"] section').show();
+// }
 
 
 
