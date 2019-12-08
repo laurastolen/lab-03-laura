@@ -57,7 +57,7 @@ $(document).ready($.get('data/page-1.json', data => {
   animalArray.forEach(animal => {
     $('main[id=page-one]').append(animal.render());
   });
-  // renderDropdown(data);
+  $('main[id=page-one] section').hide();
 })
 );
 
@@ -70,7 +70,19 @@ $(document).ready($.get('data/page-2.json', data => {
   animalArray2.forEach(animal => {
     $('main[id=page-two]').append(animal.render());
   });
-  // renderDropdown(data);
+  $('main[id=page-two] section').hide();
+})
+);
+
+// get both page data, render HB templates
+$(document).ready($.get('data/both-pages.json', data => {
+  mainVariable = 2;
+  data.forEach(animal => {
+    new Animal(animal);
+  });
+  allAnimals.forEach(animal => {
+    $('main[id=both-pages]').append(animal.render());
+  });
 })
 );
 
@@ -132,17 +144,50 @@ $(document).ready($('#myselection').on('change', function () {
 // -------------sort by horns or title:-----------------------
 
 // declare sortbyfx that takes in either title or horns as parameter
+function sortAndRender(whatToSortBy) {
+  // $('section').hide();
+  let tempArray = $('section[style!="display: none;"]');
+  tempArray.toArray();
+  if (whatToSortBy === 'Horns') {
+    tempArray.sort((a, b) => {
+      return a.horns - b.horns;
+    });
+  } else if (whatToSortBy === 'Title') {
+    tempArray.sort((a, b) => {
+      if (a.keyword < b.keyword) {
+        return -1;
+      } else if (a.keyword > b.keyword) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  }
 
-  // clear everything
-  // get the data
-  // sort it
-  // render it
+  // at this point we have a sorted tempArray, need to render it
+  // for (let i = 0; i < tempArray.length; i++) {
+  //   $('img').parent().show(); OR...
+  // $('section[style!="display: none;"]').parent().show
+  // }
+
+
+  // if (mainVariable === 0) {
+  //   $('main[id="page-one"] section').show();
+  // } else if (mainVariable === 1) {
+  //   $('main[id="page-two"] section').show();
+  // } else if (mainVariable === 2) {
+  //   $('main[id="page-one"] section').show();
+  //   $('main[id="page-two"] section').show();
+  // }
+}
 
 
 
-
-// event listeners for .sortby (sortBy buttons)
-  // if event.target.id is horns
-    // call sortbyfx(horns)
-  // else if event target id is title
-    // call sortbyfx(title)
+// event listeners for sortBy buttons with callback of sortAndRender:
+$('.sortby').on('click', function (event) {
+  if (event.target.id === 'horn-sort') {
+    sortAndRender('Horns');
+  } else if (event.target.id === 'title-sort') {
+    sortAndRender('Title');
+  }
+});

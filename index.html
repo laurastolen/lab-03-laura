@@ -11,7 +11,7 @@
   <script id="animal-template" type="text/x-handlebars-template">
     <section>
         <h2>{{title}}</h2>
-        <h3>{{horns}}</h3>
+        <h3>Number of horns: {{horns}}</h3>
         <img src={{image_url}} alt={{keyword}} page={{page}}>
         <p>{{description}}</p>
     </section>
@@ -36,9 +36,8 @@
   <button id="btn-pg-1">Page One Only</button>
   <button id="btn-pg-2">Page Two Only</button>
   <button id="btn-both-pgs">Show All Animals!</button>
-  <br>
   <button class="sortby" id="horn-sort">Sort By Horns</button>
-  <button class="sortby" id="title-sort">Sort By Title</button>
+  <button class="sortby" id="title-sort">Sort By Animal</button>
 
   <div>
     <main id="page-one">
@@ -58,6 +57,9 @@
         <p></p>
       </section> -->
     </main>
+
+    <main id="both-pages"></main>
+
   </div>
 
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
