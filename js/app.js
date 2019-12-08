@@ -57,7 +57,7 @@ $(document).ready($.get('data/page-1.json', data => {
   animalArray.forEach(animal => {
     $('main[id=page-one]').append(animal.render());
   });
-  // renderDropdown(data);
+  $('main[id=page-one] section').hide();
 })
 );
 
@@ -70,7 +70,19 @@ $(document).ready($.get('data/page-2.json', data => {
   animalArray2.forEach(animal => {
     $('main[id=page-two]').append(animal.render());
   });
-  // renderDropdown(data);
+  $('main[id=page-two] section').hide();
+})
+);
+
+// get both page data, render HB templates
+$(document).ready($.get('data/both-pages.json', data => {
+  mainVariable = 2;
+  data.forEach(animal => {
+    new Animal(animal);
+  });
+  allAnimals.forEach(animal => {
+    $('main[id=both-pages]').append(animal.render());
+  });
 })
 );
 
