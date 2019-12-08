@@ -73,7 +73,7 @@ $(document).ready($.get('data/page-2.json', data => {
 })
 );
 
-// get both page data, render HB templates
+// get both page data, render HB templates, show on initial page load, build dropdown
 $(document).ready($.get('data/both-pages.json', data => {
   mainVariable = 2;
   data.forEach(animal => {
@@ -85,16 +85,6 @@ $(document).ready($.get('data/both-pages.json', data => {
   renderDropdown(data);
 })
 );
-
-
-// $(document).ready($.get('data/both-pages.json', data => {
-//   mainVariable = 2;
-//   data.forEach(animal => {
-//     new Animal(animal);
-//   });
-//   renderDropdown(data);
-// }));
-
 
 // page one button listener
 $('#btn-pg-1').on('click', function () {
@@ -141,14 +131,9 @@ $(document).ready($('#myselection').on('change', function () {
 })
 );
 
-// -------------sort by horns or title:-----------------------
-
-// declare sortbyfx that takes in either title or horns as parameter
+// sort fx
 function sortAndRender(whatToSortBy) {
   $('section').hide();
-  // let tempArray = $('section[style!="display: none;"]');
-  // tempArray.toArray();
-
   if (whatToSortBy === 'Horns') {
     allAnimals.sort((a, b) => {
       return a.horns - b.horns;
@@ -169,25 +154,7 @@ function sortAndRender(whatToSortBy) {
   });
 }
 
-// at this point we have a sorted tempArray, need to render it
-// for (let i = 0; i < tempArray.length; i++) {
-//   $('img').parent().show(); OR...
-// $('section[style!="display: none;"]').parent().show
-// }
-
-
-// if (mainVariable === 0) {
-//   $('main[id="page-one"] section').show();
-// } else if (mainVariable === 1) {
-//   $('main[id="page-two"] section').show();
-// } else if (mainVariable === 2) {
-//   $('main[id="page-one"] section').show();
-//   $('main[id="page-two"] section').show();
-// }
-
-
-
-// event listeners for sortBy buttons with callback of sortAndRender:
+// listeners for sortBy buttons with callback of sortAndRender:
 $('.sortby').on('click', function (event) {
   if (event.target.id === 'horn-sort') {
     sortAndRender('Horns');

@@ -11,7 +11,8 @@ section {
   }
   
   img {
-    height: 150px;
-    border: 2px solid black;
+    width: 90%;
+    border: 2px solid rgb(61, 61, 61);
+    border-radius: 5px;
   }
   
